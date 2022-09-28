@@ -14,6 +14,7 @@ import csv
 
 def ej3():
     print('Ejercicio de archivos CSV 1º')
+
     archivo = 'stock.csv'
     
     # Realice un programa que abra el archivo 'stock.csv'
@@ -27,7 +28,19 @@ def ej3():
     # para cumplir con el enunciado del ejercicio
 
     # Comenzar aquí, recuerde el identado dentro de esta funcion
-    
+
+    csvfile = open(archivo, "r")
+
+    b_tornillo =  list(csv.DictReader(csvfile))
+
+    suma_tornillo = 0
+
+    for tornillo in b_tornillo:
+        suma_tornillo += int(tornillo["tornillos"])
+
+    print('El stock de tornillos es:', suma_tornillo)
+    csvfile.close()   
+
 
 
 def ej4():
@@ -48,6 +61,30 @@ def ej4():
 
     # Comenzar aquí, recuerde el identado dentro de esta funcion
 
+    csvfile = open(archivo, 'r')
+    busca_deptos = list(csv.DictReader(csvfile))
+
+    cuenta_2amb = 0
+    cuenta_3amb = 0
+    
+    cantidad_deptos = len(busca_deptos)
+    
+    for depto in range(cantidad_deptos):
+        row = busca_deptos[depto]
+        try:
+            cantidad_amb = int(row.get('ambientes'))
+            
+            if cantidad_amb == 2:
+                cuenta_2amb += 1
+            elif cantidad_amb == 3:
+                cuenta_3amb += 1
+        except:
+            continue
+    
+    print("La cantidad de deptos 2 amb es: ", cuenta_2amb )
+    print("La cantidad de deptos 3 amb es: ", cuenta_3amb)
+
+    csvfile.close()    
 
 if __name__ == '__main__':
     print("Bienvenidos a otra clase de Inove con Python")
